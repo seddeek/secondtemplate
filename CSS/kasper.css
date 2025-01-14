@@ -616,7 +616,7 @@ header nav .form i {
 }
 
 .design .design-txt ul li::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 5 Free";
     content: "\f390";
     font-weight: 900;
     margin-right: 20px;
@@ -1062,7 +1062,7 @@ header nav .form i {
 }
 
 .quote .container q::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 5 Free";
     content: "\f10d";
     font-weight: 700;
     position: relative;
@@ -1072,7 +1072,7 @@ header nav .form i {
 }
 
 .quote .container q::after {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 5 Free";
     content: "\f10e";
     font-weight: 700;
     position: relative;
