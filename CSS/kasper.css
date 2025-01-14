@@ -1,0 +1,1421 @@
+/* Start Variables */
+:root {
+    --main-color: #19c8fa;
+    --transparent-color: rgb(15 116 143 /70%);
+    --trans-paragraph-color: #777;
+    --section-padding: 100px;
+}
+
+
+/* End Variables */
+
+
+
+/* Start Global Rules */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* we use this property to smooth our scrolling in cases like pressing on link to redirect us to specific page */
+}
+
+body {
+    font-family: "Open Sans", serif;
+
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* media Queries for Responsive Screens */
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+/* End Global Rules */
+
+/* Start Components (Sections like Services) */
+
+.main-heading {
+    text-align: center;
+}
+
+.main-heading h2 {
+    font-weight: normal;
+    font-size: 40px;
+    position: relative;
+    margin-bottom: 70px;
+    text-transform: uppercase;
+}
+
+.main-heading h2::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 2px;
+    background-color: #333;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -30px;
+}
+
+.main-heading h2::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -38px;
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border: 2px solid #333;
+    border-radius: 50%;
+}
+
+.main-heading p {
+    width: 550px;
+    margin: 0 auto 100px;
+    max-width: 100%;
+    line-height: 2;
+    color: var(--trans-paragraph-color);
+}
+
+/* End Components (Sections like Services) */
+
+/* Start header */
+
+header {
+    position: absolute;
+    /* it will be positioned relative to the initial containing block, which is typically the <html> element (the entire viewport). */
+    left: 0;
+    /* left=0 according to the viewport (the whole screen) */
+    width: 100%;
+    /* 750px from media queries */
+    z-index: 2;
+    /* used to ensure that the header is positioned above other elements on the page that might have a lower or default z-index. */
+}
+
+header .container {
+    position: relative;
+    display: flex;
+    /*-When you use display: flex; on a container, its direct children (flex items) are laid out in a row direction by default (flex-direction: row).
+      -This means the children will align horizontally, from left to right. 
+      -The header .container contains multiple elements (e.g., logo, navigation menu, search icon) that need to be organized horizontally.
+      -By using display: flex;, you can easily align and distribute these elements within the container.*/
+    justify-content: space-between;
+    align-items: center;
+    /*-You used justify-content: space-between; to distribute the space between the logo, navigation menu, and search icon. This pushes the logo to the left and the search icon to the right, with the navigation menu in between.
+      -You also used align-items: center; to vertically center the items within the container. */
+    min-height: 97px;
+    /* to keep its initial height and not to be reduced in the mobile screen */
+}
+
+header .container::after {
+    /* ::after pseudo-element is used to create a horizontal line at the bottom of the "header .container." */
+    /* we can use ::before instead. with the same positiong properties */
+    content: "";
+    /*-The content property is mandatory for pseudo-elements (::after and ::before) to work. Without it, the pseudo-element won’t be rendered.
+      -it means the pseudo-element will insert empty content after the selected element (header .container in this case).
+       It’s essentially a placeholder that allows the pseudo-element to exist and be styled.
+      -Even though the content is empty, the pseudo-element can still be used to add visual effects 
+      (e.g., borders, backgrounds, or decorative elements). */
+    position: absolute;
+    bottom: 0;
+    /* Places the line at the bottom of the container. */
+    /* عشان أخليه مع نهاية الكونتينر بالظبط */
+    background-color: #a2a2a2;
+    height: 1px;
+    width: calc(100% - 30px);
+    /* Adjusts the width of the line to account for مراعاة the container’s padding. */
+    /* عشان يبقى باديء من بعد - مع نهاية يعني - البادينج ال15 بيكسل على الشمال وبينتهي مع بداية البادينج ال15 بيكسل على اليمين يعني مع بداية اللوجو بالظبط وحتى نهاية أيقونة البحث */
+    left: 15px;
+    /* Aligns the line with the container’s left padding. */
+    /* لما عملنا ليفت 0 جابه مع أول البادينج خالص على اليمين عشان كده عملناها 15 عشان نخليه مع نهاية البادينج وممكن تشيلها وهيبقى هي هي*/
+
+}
+
+header .container img {
+    height: 40px;
+}
+
+header nav {
+    flex: 1;
+    /* The flex: 1; property is applied to header nav to achieve the following:
+       - Take Up Available Space: 
+           - flex: 1; tells the nav element to grow and take up any remaining space in the header .container after the logo and
+             other elements (like the search icon) have been placed.
+           - This ensures the navigation menu expands to fill the space between the logo and the search icon.
+       - Responsive Layout:
+           - if the screen size changes or the content inside the nav changes (e.g., more menu items are added), the nav will adjust
+             its size dynamically to fit the available space. 
+             
+       - Alignment:
+           - Combined with justify-content: space-between; in the parent container (header .container), the flex: 1; property helps
+             distribute the space between the logo, navigation menu, and search icon.*/
+    /* عشان تاخد كل مساحة الكونتينر اللي متاحة */
+    display: flex;
+    /* هيوزع الليست وايقونة البحث والبرجر بارز جنب بعض أفقيا */
+    justify-content: flex-end;
+    /* هنا عشان ينقل الليست على اليمين خالص */
+    align-items: center;
+    position: relative;
+    /*-position: relative; in header nav establishes a positioning context for its child elements.
+      -It ensures that absolutely positioned child elements (e.g., .icon-bars) are positioned relative to the header nav, 
+       not the viewport or another ancestor.
+      -Without position: relative;, the layout of absolutely positioned child elements could break. */
+}
+
+/* Start Mobile phone Screen*/
+
+header .container nav .icon-bars {
+    position: absolute;
+    /* it positioned relative to the nav */
+    width: 100px;
+    display: flex;
+    /*Purpose of display: flex;:
+        -The display: flex; property turns the .icon-bars element into a flex container, allowing its child elements (the <span> elements) to be aligned and spaced using flexbox properties.
+      What Does It Do in .icon-bars?:
+        -The .icon-bars element contains three <span> elements, which represent the three lines of the burger menu icon.
+
+      By using display: flex;, you can easily:
+        -Stack the <span> elements vertically (using flex-direction: column;).
+        -Align them to the end of the container (using align-items: flex-end;).
+        -Control the spacing between them (using margin or gap). 
+
+    * If you remove display: flex; from .icon-bars:
+       -The <span> elements would behave as inline elements by default, aligning horizontally.
+       -You’d need to use additional CSS (e.g., display: block; and margin - to each span) to stack them vertically and align them properly.
+       -The code would become more complex and harder to maintain.
+
+       Result:
+       -The <span> elements would stack vertically, but you’d lose the flexibility and simplicity of flexbox.
+       -You’d need to manually adjust spacing and alignment using margin or other properties.
+     */
+    flex-wrap: nowrap;
+    /* دي القيمة الافتراضية فملهاش تأثير ممكن نشيلها لكن التأثير هيظهر لو:
+    لو اتجاه الفليكس كان صف مش عمود وقتها التلاتة سبان هيجوا على صف واحد بحجم كلي يساوي 90بيكسل لأن كل واحدة 30بيكسل
+    والناف عندنا حجمها 100بيكسل ف أول ما حجمها يقل عن 90 السبانز هتفضل على صف واحد ولكن حجمها هيفضل يقل 
+    
+    لكن لو أنت عامل الفليكس راب راب السبان هتنزل على كذا صف ولما يجي حجمها ل60 بيكسل هتتقسم على صفين صف فيه 
+    اتنين سبان وصف واحدة بس بعدين لما نبقى 59 بيكسل كده قللنا عن 60 فكده كل واحدة نزلت في صف بقا بحجمها
+      وباقي المقاس هيتوزع يمين وشمال وهم هيبقوا في النص، لحد ما يوصل حجم الناف30 بيكسل وقتها هيبقوا ال3 فوق بعض ومفيش
+       أي مساحة باقية
+احنا ممكن نشيل الراب ونغير حجم الناف ل30 ونخلي حجم كل سبان برده 30 وهنسيب الاتجاه عمود وهتبقى تمام برده
+*/
+    flex-direction: column;
+    /*  Stacks the <span> elements vertically (one on top of the other). */
+    top: 5.5px;
+    right: 50px;
+    justify-content: center;
+    /* Centers the <span> elements vertically within the .icon-bars container. */
+    align-items: flex-end;
+    /* Aligns the <span> elements to the right (end) of the .icon-bars container. */
+
+}
+
+header .container nav .icon-bars:hover span:nth-child(2) {
+    transform: translateX(-15%);
+    /* transition-delay: .2s; */
+}
+
+header .container nav .icon-bars span {
+    background-color: white;
+    margin-bottom: 5px;
+}
+
+header .container nav .icon-bars span:first-child {
+    width: 30px;
+    height: 3px;
+    border-radius: 2px;
+
+}
+
+header .container nav .icon-bars span:nth-child(2) {
+    width: 30px;
+    height: 3px;
+    border-radius: 2px;
+    /* transition: 1s;
+    transition-delay: 0s; */
+
+}
+
+header .container nav .icon-bars span:last-child {
+    width: 30px;
+    height: 3px;
+    border-radius: 2px;
+    /* transition: 1s;
+    transition-delay: 0.2s; */
+}
+
+@media (min-width: 767px) {
+    header .container nav .icon-bars {
+        display: none;
+    }
+
+    /* خد بالك كان لازم تكتب ليست النيستنج كلها زي ما هي بالظبط عشان الأكشن يتطبق */
+}
+
+/* End Mobile phone Screen*/
+
+header nav ul {
+    display: flex;
+    /* عشان اتحكم فيهم وكمان عن طريقها هنخليهم جنب بعض */
+
+}
+
+@media (max-width: 767px) {
+    header nav ul {
+        display: none;
+    }
+
+
+    header .container nav .icon-bars:hover+ul {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        /* it positioned relative to the nav */
+        top: 255%;
+        /*  top, right, bottom, and left:
+           -These properties are used to position an element within its containing block (the nearest positioned ancestor or the viewport).
+            They are part of the CSS positioning system.
+           -These properties are used whenever an element has a position value other than static (the default).*/
+        left: -124.5px;
+        /* if you made top and left = 0 the ul will stick to the nav top-left edges 
+        
+        Summary:
+          -top, right, bottom, and left are positioning properties.
+          -They are used with position: absolute;, relative;, fixed;, or sticky;.
+          -They are not tied to display: flex; but can be used alongside it for advanced layouts.
+        */
+        background-color: rgba(0, 0, 0, 0.78);
+
+    }
+
+
+
+    header .container nav ul li a {
+        padding: 15px !important;
+        /* حطينا الامبورتنت فلاج عشان احنا دايما محتاجين البادينج يبقى كده في نسخة الموبايل 
+    
+    The !important flag in header .container nav ul li a is used to override any conflicting styles that might be applied 
+    to the <a> elements (navigation links) from other CSS rules.
+    */
+    }
+
+    /* هنا تأثير الفلاج مش هيظهر لأنها دخلت خلاص في شرط الميديا كويري للموبايل لكن لو خرجناها برا الشرط تأثيره هيظهر على كل الحالات
+وهيخلي اللينكات تاخد بادينج 15 بس وهيلغي البادينج الاربعين اللي تحت ده  */
+}
+
+header nav ul li a {
+    display: block;
+    /* عشان تبقى تستجيب للخصائص اللي هنديهالها */
+    padding: 40px 10px;
+    color: white;
+    text-decoration: none;
+    transition: .3s;
+    font-size: 14px;
+    position: relative;
+    /* we made it that we can need it for any a childs like ::before ::after */
+    z-index: 2;
+    /* Ensures the <a> element appears above other content (e.g., pseudo-elements or background effects). */
+}
+
+header nav ul li a.active,
+header nav ul li a:hover {
+    color: var(--main-color);
+    border-bottom: 2px solid var(--main-color);
+
+}
+
+header nav .form {
+    width: 40px;
+    height: 30px;
+    position: relative;
+    margin-left: 30px;
+    border-left: 1px solid white;
+}
+
+header nav .form i {
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+}
+
+/* End header */
+
+/* Start Landing */
+
+.landing {
+    min-height: 100vh;
+    /* to make min-height equal the full page height */
+    background-color: black;
+    /* it will be apllied if the background image not exist */
+    background-image: url(../images/landing.jpg);
+    background-size: cover;
+    /* to cover all of the viewport */
+    position: relative;
+}
+
+.landing .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* width and height is 100% from the landing */
+    background-color: rgb(0 0 0 /60%);
+    /* 60% opacity */
+}
+
+.landing .text {
+    position: absolute;
+    color: white;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50%;
+    padding: 50px;
+    background-color: var(--transparent-color);
+    display: flex;
+    /* خد بالك لو فيه كونتينر جواه حاجات وفيه بعد الكونتينر ده مثلا براجراف ف تأثير الفليكس هيكون على الكونتينر ككل وهيجيب 
+    جنبه البراجراف لكن مش هيأثر على اللي جوا الكونتينر، عشان كده احنا مش محتاجين الفليكس دايركشن */
+    justify-content: end;
+    /* تأثيرها هيظهر لما كونتينر الكونتنت ياخد حجم أقل من ال50% بتوع كونتينر التيكست يعني لما هنحط 400 تحت هيظهر */
+}
+
+@media (max-width: 767px) {
+    .landing .text {
+        width: 100%;
+        height: 60%;
+    }
+}
+
+
+.landing .text .content {
+    max-width: 500px;
+}
+
+@media (max-width: 767px) {
+    .landing .text {
+        width: 100%;
+    }
+
+    .landing .text .content {
+        max-width: 100%;
+    }
+}
+
+.landing .text .content h2 {
+    font-size: 32px;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.landing .text .content p {
+    font-size: 14px;
+    line-height: 2;
+}
+
+.landing .change-background {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffffff;
+}
+
+@media (max-width: 767px) {
+    .landing .change-background {
+        display: none;
+    }
+}
+
+.landing .arrow-control-r {
+    right: 30px;
+}
+
+.landing .arrow-control-l {
+    left: 30px;
+}
+
+.landing .bullets {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    display: flex;
+    /* التلاتة اللي تحت دول عشان نحط مسافة بين ال3 دواير */
+    width: 80px;
+    /* هنا هندي الكونتير - البوليتس - حجم عشان يبقى أكبر من حجم الثلاث دواير فنوزع المساحة الباقية بينهم */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.landing .bullets li {
+    width: 20px;
+    height: 20px;
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+.landing .bullets li.active {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+/* End Landing */
+
+/* Start Services Section */
+
+.services {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+}
+
+@media (min-width: 768px) {
+    .services .services-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        grid-column-gap: 40px;
+        grid-row-gap: 60px;
+    }
+}
+
+.services .serv-box {
+    display: flex;
+}
+
+.services .serv-box i {
+    margin-right: 50px;
+}
+
+@media (max-width: 768px) {
+    .services .serv-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .services .serv-box i {
+        margin: 0 0 30px;
+    }
+}
+
+.services .serv-box h3 {
+    margin-bottom: 30px;
+    color: var(--main-color);
+}
+
+.services .serv-box p {
+    line-height: 2;
+    color: var(--trans-paragraph-color);
+}
+
+/* End Services Section */
+
+/* Start Design Section */
+
+.design {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    height: 600px;
+    position: relative;
+    /* we made it to use in making the overlay (will take position:absolute) */
+    background-image: url("../images/design-features.jpg");
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+}
+
+.design::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* width and height is 100% from the design */
+    background-color: rgb(0 0 0 /50%);
+    /* 60% opacity */
+}
+
+.design .image,
+.design .design-txt {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+}
+
+.design .image {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .design .image {
+        display: none;
+    }
+
+}
+
+.design .image img {
+    position: relative;
+    bottom: -150px;
+}
+
+.design .design-txt {
+    color: white;
+    padding: 50px;
+    background-color: var(--transparent-color);
+}
+
+.design .design-txt h2 {
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+
+.design .design-txt ul li {
+    padding: 15px 0;
+}
+
+.design .design-txt ul li::before {
+    font-family: "Font Awesome 6 Free";
+    content: "\f390";
+    font-weight: 900;
+    margin-right: 20px;
+    position: relative;
+    /* we use it so we can use top,right.... properties */
+    top: 2px;
+}
+
+/* End Design Section */
+
+/* Start Portfolio Section */
+
+.portfolio {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+}
+
+.portfolio .shuffle {
+    display: flex;
+    justify-content: center;
+
+}
+
+.portfolio .shuffle li {
+    padding: 10px;
+}
+
+.portfolio .shuffle li.active {
+    background-color: var(--main-color);
+    color: white;
+
+}
+
+.portfolio .imgs-contaier {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 60px;
+}
+
+.portfolio .imgs-contaier .box {
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio .imgs-contaier .box:hover .caption {
+    bottom: 0;
+}
+
+.portfolio .imgs-contaier .box:hover img {
+    transform: rotate(3deg) scale(1.1);
+}
+
+@media (min-width: 767px) {
+    .portfolio .imgs-contaier .box {
+        flex-basis: 50%;
+        /* Takes up 50% of the container's width */
+    }
+
+    /* start from 767px and up, it will fill the screen with 2 images only in the box */
+}
+
+@media (min-width: 1199px) {
+    .portfolio .imgs-contaier .box {
+        flex-basis: 25%;
+        /* Takes up 25% of the container's width */
+    }
+
+    /* start from 767px and up, it will fill the screen with 2 images only in the box */
+}
+
+.portfolio .imgs-contaier .box img {
+    max-width: 100%;
+    transition: .3s;
+}
+
+.portfolio .imgs-contaier .box .caption {
+    position: absolute;
+    left: 0;
+    padding: 20px;
+    background-color: white;
+    width: 100%;
+    transition: .3s;
+    bottom: -100%;
+}
+
+.portfolio .imgs-contaier .box .caption h4 {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.portfolio .imgs-contaier .box .caption p {
+    color: var(--main-color);
+}
+
+.portfolio .more {
+    background-color: var(--main-color);
+    display: block;
+    color: white;
+    width: fit-content;
+    padding: 15px 20px;
+    margin: 30px auto;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/* End Portfolio Section */
+
+/* Start video Section */
+
+.video {
+    position: relative;
+}
+
+.video::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* width and height is 100% from the video */
+    background-color: rgb(0 0 0 /40%);
+    /* 40% opacity */
+}
+
+.video video {
+    width: 100%;
+}
+
+.video .text {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--transparent-color);
+    color: white;
+    padding: 50px;
+    text-align: center;
+}
+
+.video .text h2 {
+    margin: 0 0 20px;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+@media (max-width: 767px) {
+    .video .text h2 {
+        font-size: 19px;
+    }
+}
+
+.video .text p {
+    margin-bottom: 20px;
+    text-transform: capitalize;
+}
+
+.video .text button {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    text-transform: uppercase;
+}
+
+/* End Video Section */
+
+/* start About Section */
+
+.about {
+    padding-top: var(--section-padding);
+    overflow: hidden;
+    text-align: center;
+}
+
+.about img {
+    position: relative;
+    bottom: -120px;
+    margin-top: -120px;
+    /* عشان نقلل الفراغ اللي ظهر بينها وبين العنوان فوق، فكان لازم نحط نفس القيمة اللي حطيناها في البوتوم */
+    max-width: 100%;
+    /* عشان متخرجش برا مساحة الكونتينر بتاعها */
+}
+
+@media (max-width:767px) {
+    .about img {
+        bottom: -60px;
+        margin-top: -60px;
+    }
+}
+
+/* End About Section */
+
+/* Start Statistics Section */
+
+.stats {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    text-align: center;
+    background-image: url("../images/stats.png");
+    background-size: cover;
+    position: relative;
+}
+
+.stats::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* width and height is 100% from the video */
+    background-color: rgb(0 0 0 /70%);
+    /* 40% opacity */
+}
+
+.stats .container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stats .container .box {
+    color: white;
+    padding: 50px;
+    background-color: var(--transparent-color);
+}
+
+/*start Mobile First idea */
+@media (max-width:767px) {
+    .stats .container .box {
+        flex-basis: 100%;
+    }
+
+
+}
+
+@media (min-width:768px) {
+    .stats .container .box {
+        flex-basis: 50%;
+    }
+}
+
+@media (min-width:992px) {
+    .stats .container .box {
+        flex-basis: 25%;
+    }
+}
+
+.stats .container .box i {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    background-color: black;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: 0 auto 30px;
+}
+
+.stats .container .box .number {
+    font-size: 50px;
+    font-weight: bold;
+    margin: 0 0 20px;
+}
+
+.stats .container .box p {
+    font-size: 14px;
+}
+
+/*End Mobile First idea */
+
+/* End Statistics Section */
+
+/* Start Skills Section */
+
+.our-skills {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+}
+
+.our-skills .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 992px) {
+    .our-skills .container>div {
+        flex-basis: 45%;
+    }
+}
+
+.our-skills .container>div>h3 {
+    margin: 0 0 30px;
+    font-weight: normal;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.our-skills .container>div>p {
+    color: var(--trans-paragraph-color);
+    line-height: 2;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.our-skills .testimonials .content {
+    display: flex;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.our-skills .testimonials .content img {
+    width: 100px;
+    height: 100px;
+    /* الاثنين في الصورة متساويين أصلا */
+    border-radius: 50%;
+    margin-right: 50px;
+}
+
+@media (max-width:767px) {
+    .our-skills .testimonials .content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .our-skills .testimonials .content img {
+        margin: 0 auto 20px;
+    }
+}
+
+.our-skills .testimonials .text {
+    line-height: 1.8;
+    border-bottom: 1px solid #ccc;
+}
+
+.our-skills .testimonials .text p {
+    color: var(--trans-paragraph-color);
+    text-align: right;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.our-skills .testimonials .bullets {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.our-skills .testimonials .bullets li {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.our-skills .testimonials .bullets li.active {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.our-skills .skills .prog-holder {
+    margin-bottom: 40px;
+}
+
+.our-skills .skills .prog-holder h4 {
+    margin-bottom: 15px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.our-skills .skills .prog-holder .prog {
+    background-color: #dedadc;
+    height: 30px;
+}
+
+.our-skills .skills .prog-holder .prog span {
+    display: block;
+    background-color: var(--main-color);
+    height: 100%;
+    position: relative;
+}
+
+.our-skills .skills .prog-holder .prog span::before {
+    content: attr(data-progress);
+    position: absolute;
+    background-color: black;
+    color: white;
+    top: -40px;
+    right: -18px;
+    padding: 4px 0;
+    width: 40px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.our-skills .skills .prog-holder .prog span::after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    border-width: 8px;
+    border-color: black transparent transparent transparent;
+    right: -8px;
+    top: -15px;
+}
+
+/* End Skills Section */
+/* Start Quote */
+
+.quote {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    background-image: url("../images/quote.jpg");
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.quote::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* width and height is 100% from the quote */
+    background-color: rgb(0 0 0 /75%);
+    /* 60% opacity */
+}
+
+.quote .container {
+    position: relative;
+}
+
+.quote q {
+    font-size: 30px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.quote .container q::before {
+    font-family: "Font Awesome 6 Free";
+    content: "\f10d";
+    font-weight: 700;
+    position: relative;
+    /* we use it so we can use top,right.... properties */
+    top: 0;
+    margin-right: 5px;
+}
+
+.quote .container q::after {
+    font-family: "Font Awesome 6 Free";
+    content: "\f10e";
+    font-weight: 700;
+    position: relative;
+    /* we use it so we can use top,right.... properties */
+    top: 0;
+    margin-left: 5px;
+}
+
+/* End Quote */
+
+/* Start Pricing */
+
+.pricing {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+}
+
+.pricing .plans-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.pricing .plans-box .plan {
+    background-color: #fcfcfc;
+    text-align: center;
+}
+
+.pricing .plans-box .plan .head {
+    padding: 40px 20px;
+    border-top: 1px solid var(--main-color);
+    border-bottom: 1px solid var(--main-color);
+}
+
+.pricing .plans-box .plan .head h3 {
+    font-weight: normal;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.pricing .plans-box .plan .head span {
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.pricing .plans-box .plan .head span::before {
+    content: "$";
+    font-size: 25px;
+    position: relative;
+    top: -40px;
+    margin-right: 15px;
+    font-weight: normal;
+}
+
+.pricing .plans-box .plan .head span::after {
+    content: "/Mo";
+    font-size: 20px;
+    position: relative;
+    right: -15px;
+}
+
+.pricing .plans-box .plan ul {
+    border-bottom: 1px solid var(--main-color);
+}
+
+.pricing .plans-box .plan ul li {
+    padding: 20px;
+    position: relative;
+}
+
+.pricing .plans-box .plan ul li:not(:last-child)::after {
+    content: "";
+    width: 140px;
+    height: 1px;
+    background-color: var(--main-color);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+}
+
+.pricing .plans-box .plan .foot a {
+    display: block;
+    padding: 20px 20px;
+    text-decoration: none;
+    border: 1px solid var(--main-color);
+    width: fit-content;
+    margin: 30px auto;
+}
+
+.pricing .contact-text {
+    text-align: center;
+    margin: 50px auto 20px;
+    font-size: 20px;
+}
+
+.pricing .contact-link {
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    background-color: var(--main-color);
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+}
+
+/* End Pricing */
+
+/* Start Subscribe */
+.subscribe {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    background-image: url("../images/subscribe.jpg");
+    background-size: cover;
+    position: relative;
+    color: white;
+}
+
+.subscribe::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 50%);
+}
+
+.subscribe .container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 991px) {
+    .subscribe .container {
+        flex-direction: column;
+    }
+}
+
+.subscribe form {
+    display: flex;
+    position: relative;
+    width: 500px;
+    max-width: 100%;
+}
+
+.subscribe form i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 25px;
+}
+
+.subscribe form input[type="email"] {
+    border: 1px solid white;
+    border-right: none;
+    background: none;
+    padding: 20px 20px 20px 60px;
+    caret-color: var(--main-color);
+    width: calc(100% - 130px);
+    color: white;
+}
+
+.subscribe form input[type="submit"] {
+    width: 130px;
+    background-color: var(--main-color);
+    color: white;
+    padding: 10px 20px;
+    border: 1px solid white;
+    border-left: none;
+    text-transform: uppercase;
+}
+
+.subscribe form input[type="email"]:focus,
+.subscribe form input[type="submit"]:focus {
+    outline: none;
+}
+
+.subscribe form ::placeholder {
+    color: white;
+}
+
+.subscribe p {
+    line-height: 2;
+    margin-left: 50px;
+}
+
+@media (max-width: 991px) {
+    .subscribe p {
+        margin: 30px 0 0;
+    }
+}
+
+/* End Subscribe */
+
+/* Start Contact */
+.contact {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+}
+
+.contact .content {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width:767px) {
+    .contact .content {
+        flex-direction: column;
+    }
+}
+
+.contact .content form {
+    flex-basis: 70%;
+}
+
+.contact .content form .main-input {
+    padding: 20px;
+    display: block;
+    border: 1px solid #ccc;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.contact .content form .main-input:focus {
+    outline: none;
+}
+
+.contact .content form textarea.main-input {
+    height: 200px;
+}
+
+.contact .content form input[type="submit"] {
+    background-color: var(--main-color);
+    color: white;
+    padding: 20px;
+    border: none;
+    display: flex;
+    margin-left: auto;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.contact .content .info {
+    flex-basis: 25%;
+}
+
+@media (max-width:767px) {
+    .contact .content .info {
+        order: -1;
+        /* to make the info fields comes first then the input fields comes after */
+        text-align: center;
+
+    }
+}
+
+.contact .content .info h4 {
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.contact .content .info .phone {
+    display: block;
+    color: var(--trans-paragraph-color);
+    margin-bottom: 10px;
+
+}
+
+.contact .content .info h4:nth-of-type(2) {
+    margin-top: 90px;
+}
+
+@media (max-width:767px) {
+    .contact .content .info h4:nth-of-type(2) {
+        margin-top: 30px;
+    }
+}
+
+.contact .content .info address {
+    color: #777;
+    line-height: 2;
+}
+
+@media (max-width:767px) {
+    .contact .content .info address {
+        margin-bottom: 40px;
+    }
+}
+
+/* End Contact */
+/* Start Footer */
+
+.footer {
+    padding-top: calc(var(--section-padding) / 2);
+    padding-bottom: calc(var(--section-padding) / 2);
+    background-image: url("../images/subscribe.jpg");
+    background-size: cover;
+    position: relative;
+    color: white;
+    text-align: center;
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 70%);
+}
+
+.footer .container {
+    position: relative;
+}
+
+.footer img {
+    margin-bottom: 20px;
+}
+
+.footer p:not(.copyright) {
+    text-transform: uppercase;
+    padding: 20px;
+    border-bottom: 1px solid white;
+    font-size: 22px;
+    width: fit-content;
+    margin: 20px auto;
+}
+
+.footer .social-icons i {
+    padding: 10px 15px;
+}
+
+.footer .copyright {
+    margin-top: 60px;
+}
+
+.footer .copyright span {
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+/* End Footer */
